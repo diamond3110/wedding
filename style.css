@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Georgia", serif;
+    background: #f5f0eb;
+    color: #333;
+}
+
+.hero {
+    position: relative;
+
+    height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.35)
+        ),
+        url("images/main.jpg");
+
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.overlay {
+    text-align: center;
+    background-color: rgba(255,255,255,0.7);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.4rem;
+}
+
+button {
+    margin-top: 30px;
+
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 50px;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    background: #d4a373;
+    color: white;
+}
+
+button:hover {
+    background: #bc8a5f;
+}
+
+.invitation {
+    max-width: 800px;
+
+    margin: 100px auto;
+
+    background: white;
+
+    padding: 50px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none;
+}
