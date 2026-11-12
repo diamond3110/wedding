@@ -5,34 +5,33 @@
 }
 
 body {
-    font-family: "Georgia", serif;
+    font-family: Georgia, serif;
     background: #f5f0eb;
     color: #333;
 }
 
 .hero {
     position: relative;
-
     height: 100vh;
 
     background-image:
         linear-gradient(
-            rgba(0,0,0,0.35),
-            rgba(0,0,0,0.35)
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.35)
         ),
         url("images/main.jpg");
 
     background-size: cover;
-    background-position: center center;
+    background-position: center;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
 .overlay {
     text-align: center;
-    background-color: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.7);
     padding: 40px;
     border-radius: 20px;
 }
@@ -48,14 +47,12 @@ p {
 
 button {
     margin-top: 30px;
-
     padding: 15px 30px;
 
     border: none;
     border-radius: 50px;
 
     font-size: 1rem;
-
     cursor: pointer;
 
     background: #d4a373;
@@ -66,22 +63,86 @@ button:hover {
     background: #bc8a5f;
 }
 
-.invitation {
-    max-width: 800px;
-
-    margin: 100px auto;
-
-    background: white;
-
-    padding: 50px;
-
-    border-radius: 20px;
-
-    text-align: center;
-
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
 .hidden {
     display: none;
 }
+
+.invitation {
+    max-width: 800px;
+    margin: 50px auto;
+
+    background: white;
+    border-radius: 20px;
+
+    padding: 50px;
+    text-align: center;
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.guest-name {
+    margin-top: 20px;
+
+    font-size: 30px;
+    font-style: italic;
+
+    color: #7b5c3a;
+}
+
+.wedding-date-section {
+    margin-top: 40px;
+    padding-top: 40px;
+
+    text-align: center;
+
+    border-top: 1px solid #ccbba7;
+}
+
+.wedding-date-section h2 {
+    font-size: 48px;
+    margin-bottom: 50px;
+
+    color: #50443d;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+.countdown-card {
+    min-width: 140px;
+
+    padding: 30px;
+
+    background: #f5f0eb;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.countdown-card span {
+    display: block;
+
+    font-size: 52px;
+    font-weight: bold;
+
+    color: #d4a373;
+
+    transition: 0.3s ease;
+}
+
+.countdown-card p {
+    margin-top: 10px;
+
+    font-size: 20px;
+    color: #555;
+}
+
+.wedding-info {
+    margin-top: 50px;
+}
+
