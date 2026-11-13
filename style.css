@@ -82,18 +82,18 @@ button {
     border-radius: 50px;
     font-size: 1rem;
     cursor: pointer;
-    background: #38a785;
+    background: #70785B;
     color: white;
     transition: background 0.3s ease;
 }
 
 button:hover {
-    background: #bc8a5f;
+    background: #8A9A5B;
 }
 
 /* ОБРАТНАЯ СТОРОНА */
 .invitation {
-    background: #f5f0eb;
+    background: #70785B;
     transform: rotateY(180deg);
     overflow-y: auto; /* Позволяет скроллить страницу вниз, если текста станет больше */
     padding: 40px 20px;
@@ -116,7 +116,7 @@ button:hover {
 .guest-name {
     font-size: 32px;
     font-style: italic;
-    color: #7b5c3a;
+    color: #87926c;
     margin-bottom: 15px;
 }
 
@@ -130,7 +130,7 @@ button:hover {
 .wedding-date-section h2 {
     font-size: 40px;
     margin-bottom: 40px;
-    color: #50443d;
+    color: #696161;
 }
 
 .countdown {
@@ -152,7 +152,7 @@ button:hover {
     display: block;
     font-size: 48px;
     font-weight: bold;
-    color: #d4a373;
+    color: #70785B;
 }
 
 .countdown-card p {
@@ -179,12 +179,12 @@ button:hover {
 
 .btn-back {
     background: transparent;
-    border: 2px solid #d4a373;
-    color: #7b5c3a;
+    border: 2px solid #737a61;
+    color: #70785B;
 }
 
 .btn-back:hover {
-    background: #d4a373;
+    background: #8A9A5B;
     color: white;
 }
 
@@ -238,7 +238,7 @@ button:hover {
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.92);
+    background: #ffffff;
     backdrop-filter: blur(4px);
     padding: 10px 22px;
     border-radius: 50px;
@@ -248,7 +248,7 @@ button:hover {
 
 .map-badge span {
     font-size: 0.95rem;
-    color: #50443d;
+    color: #8A9A5B;
     font-weight: bold;
     white-space: nowrap;
 }
@@ -264,7 +264,7 @@ button:hover {
 }
 
 .map-link:hover .map-badge {
-    background: #d4a373;
+    background: #8A9A5B;
 }
 
 .map-link:hover .map-badge span {
@@ -277,7 +277,7 @@ button:hover {
 .timeline-section {
     margin-top: 40px;
     padding-top: 40px;
-    border-top: 1px solid #ccbba7;
+    border-top: 1px solid #70785B;
     text-align: center;
 }
 
@@ -309,7 +309,7 @@ button:hover {
 
 .wave-bg {
     fill: none;
-    stroke: #e6dcd2;
+    stroke: #70785B;
     stroke-width: 3;
     stroke-linecap: round;
     stroke-dasharray: 6 6; /* Пунктир для непройденного пути */
@@ -317,7 +317,7 @@ button:hover {
 
 .wave-progress {
     fill: none;
-    stroke: #d4a373;
+    stroke: #70785B;
     stroke-width: 3.5;
     stroke-linecap: round;
 }
@@ -334,7 +334,7 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(212, 163, 115, 0.4);
+    box-shadow: 0 4px 12px #70785B;
     transform: translate(-50%, -50%);
     z-index: 3;
     pointer-events: none;
@@ -364,7 +364,7 @@ button:hover {
     display: inline-block;
     font-size: 1.3rem;
     font-weight: bold;
-    color: #d4a373;
+    color: #70785B;
     background: #f5f0eb;
     padding: 4px 14px;
     border-radius: 20px;
@@ -472,11 +472,11 @@ button:hover {
 }
 
 .radio-card input[type="radio"]:checked + span {
-    background: #d4a373;
-    border-color: #d4a373;
+    background: #70785B;
+    border-color: #70785B;
     color: white;
     font-weight: bold;
-    box-shadow: 0 4px 12px rgba(212, 163, 115, 0.35);
+    box-shadow: 0 4px 12px rgba(112, 120, 91, 0.35);
 }
 
 .btn-submit {
