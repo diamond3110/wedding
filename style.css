@@ -724,6 +724,131 @@ button:hover {
     font-weight: 600;
 }
 
+/* БЛОК С ПОЖЕЛАНИЯМИ ПОДАРКОВ */
+.wishes-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #ccbba7;
+    text-align: center;
+}
+
+.wishes-section h2 {
+    font-size: 36px;
+    color: #50443d;
+    margin-bottom: 25px;
+}
+
+.wishes-card {
+    background: #f5f0eb;
+    border-radius: 20px;
+    padding: 35px 30px;
+    max-width: 650px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.wishes-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 18px;
+    background: white;
+    color: #70785B; /* Ваш оливковый акцент */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(112, 120, 91, 0.2);
+}
+
+.wishes-text {
+    font-size: 1.15rem;
+    color: #50443d;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.wishes-text strong {
+    color: #70785B; /* Выделение ключевой фразы оливковым цветом */
+}
+
+.wishes-subtext {
+    font-size: 0.98rem;
+    color: #7b5c3a;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* СЕТКА КАРТОЧЕК МАГАЗИНОВ */
+.gift-stores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+    text-align: left;
+}
+
+.store-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    padding: 14px 16px;
+    border-radius: 16px;
+    text-decoration: none;
+    border: 1.5px solid rgba(112, 120, 91, 0.22);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.store-card:hover {
+    transform: translateY(-3px);
+    border-color: #70785B; /* Оливковый контур усиливается без смены оттенка */
+    box-shadow: 0 8px 20px rgba(112, 120, 91, 0.16);
+}
+
+.store-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #f5f0eb;
+    color: #70785B; /* Оливковая иконка */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.store-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.store-category {
+    font-size: 0.78rem;
+    color: #7b5c3a;
+    margin-bottom: 2px;
+}
+
+.store-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #50443d;
+}
+
+.store-arrow {
+    font-size: 1.1rem;
+    color: #70785B;
+    font-weight: bold;
+    transition: transform 0.25s ease;
+}
+
+.store-card:hover .store-arrow {
+    transform: translate(2px, -2px);
+}
+
+
+
 /* Адаптация под мобильные экраны */
 @media (max-width: 600px) {
     h1 {
@@ -773,4 +898,17 @@ button:hover {
     .radio-card {
         min-width: 100%;
     }
+        .wishes-section h2 {
+        font-size: 28px;
+    }
+    .wishes-card {
+        padding: 25px 20px;
+    }
+    .wishes-text {
+        font-size: 1.05rem;
+    }
+    .gift-stores-grid {
+        grid-template-columns: 1fr;
+    }
 }
+
