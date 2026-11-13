@@ -3,24 +3,68 @@ const openButton = document.getElementById("openInvitation");
 const closeButton = document.getElementById("closeInvitation");
 const invitationSide = document.getElementById("invitation");
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("quest");
+document.addEventListener('DOMContentLoaded', () => {
+    // Ваш список гостей (сортируется автоматически)
+    const guestsList = [
+        "Валерий и Оксана Каража",
+        "Сергей и Юлия Лазаревы",
+        "Валентина и Иван Киорогло",
+        "Виталий и Виктория Киорогло",
+        "Александр и Людмила Каража",
+        "Тит и Ксения Лазаревы",
+        "Иван и Мария Самси",
+        "Олег и Татьяна Волковы",
+        "Иван и Наталья Каража"
+    ];
 
-const quest = {
-    1: "Валерий и Оксана Каража",
-    2: "Сергей и Юлия Лазаревы",
-    3: "Валентина и Иван Киорогло",
-    4: "Виталий и Виктория Киорогло",
-    5: "Александр и Людмила Каража",
-    6: "Тит и Ксения Лазаревы",
-    7: "Иван и Мария Самси",
-    8: "Олег и Татьяна Волковы",
-    9: "Иван и Наталья Каража"
-};
+    const customSelect = document.getElementById('custom-guest-select');
+    const trigger = document.getElementById('select-trigger');
+    const optionsContainer = document.getElementById('select-options');
+    const hiddenInput = document.getElementById('guest-name-input');
 
-if (id && quest[id]) {
-    document.getElementById("guestName").textContent = `Дорогие ${quest[id]}`;
-}
+    if (customSelect && trigger && optionsContainer && hiddenInput) {
+        const placeholder = trigger.querySelector('.select-placeholder');
+        
+        // 1. Сортируем по алфавиту
+        const sortedGuests = [...guestsList].sort((a, b) => a.localeCompare(b, 'ru'));
+
+        // 2. Создаем красивые пункты меню
+        sortedGuests.forEach(guest => {
+            const optionEl = document.createElement('div');
+            optionEl.classList.add('select-option');
+            optionEl.textContent = guest;
+
+            // Выбор гостя при клике
+            optionEl.addEventListener('click', () => {
+                placeholder.textContent = guest;
+                hiddenInput.value = guest;
+                trigger.classList.add('has-value');
+                trigger.style.borderColor = '#e2d5c8'; // Убираем красную обводку, если была ошибка
+
+                // Выделяем выбранный пункт
+                optionsContainer.querySelectorAll('.select-option').forEach(el => el.classList.remove('selected'));
+                optionEl.classList.add('selected');
+
+                customSelect.classList.remove('open');
+            });
+
+            optionsContainer.appendChild(optionEl);
+        });
+
+        // 3. Открытие / закрытие при клике на поле
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('open');
+        });
+
+        // 4. Закрытие при клике в любое другое место страницы
+        document.addEventListener('click', (e) => {
+            if (!customSelect.contains(e.target)) {
+                customSelect.classList.remove('open');
+            }
+        });
+    }
+});
 
 openButton.addEventListener("click", () => {
     card.classList.add("is-flipped");
@@ -168,3 +212,64 @@ if (rsvpForm) {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('bg-music');
+    const muteBtn = document.getElementById('mute-btn');
+    const volumeSlider = document.getElementById('volume-slider');
+    const iconOn = document.getElementById('icon-sound-on');
+    const iconOff = document.getElementById('icon-sound-off');
+
+    let lastVolume = 0.5; // Запоминаем громкость до выключения
+    audio.volume = lastVolume;
+
+    // Функция обновления иконки
+    function updateIcon(volume) {
+        if (volume === 0 || audio.paused) {
+            iconOn.style.display = 'none';
+            iconOff.style.display = 'block';
+        } else {
+            iconOn.style.display = 'block';
+            iconOff.style.display = 'none';
+        }
+    }
+
+    // Изначально ставим иконку "выключено", пока музыка не запущена
+    updateIcon(0);
+
+    // Клик по кнопке звука (вкл/выкл)
+    muteBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            // Если музыка еще не играла — запускаем
+            audio.play().catch(e => console.log("Нужно взаимодействие пользователя:", e));
+            audio.volume = lastVolume > 0 ? lastVolume : 0.5;
+            volumeSlider.value = audio.volume;
+        } else if (audio.volume > 0) {
+            // Если звук есть — выключаем (mute)
+            lastVolume = audio.volume;
+            audio.volume = 0;
+            volumeSlider.value = 0;
+        } else {
+            // Если звук был на 0 — возвращаем прошлую громкость
+            audio.volume = lastVolume > 0 ? lastVolume : 0.5;
+            volumeSlider.value = audio.volume;
+        }
+        updateIcon(audio.volume);
+    });
+
+    // Перетаскивание ползунка
+    volumeSlider.addEventListener('input', (e) => {
+        const newVolume = parseFloat(e.target.value);
+        
+        // Если пользователь начал двигать ползунок, а музыка еще на паузе — запускаем её
+        if (audio.paused && newVolume > 0) {
+            audio.play().catch(e => console.log("Ошибка запуска:", e));
+        }
+
+        audio.volume = newVolume;
+        if (newVolume > 0) {
+            lastVolume = newVolume;
+        }
+        updateIcon(newVolume);
+    });
+});
