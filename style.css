@@ -82,7 +82,7 @@ button {
     border-radius: 50px;
     font-size: 1rem;
     cursor: pointer;
-    background: #d4a373;
+    background: #38a785;
     color: white;
     transition: background 0.3s ease;
 }
@@ -188,23 +188,6 @@ button:hover {
     color: white;
 }
 
-/* Адаптация под мобильные экраны */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    .invitation-content {
-        padding: 30px 20px;
-    }
-    .wedding-date-section h2 {
-        font-size: 28px;
-    }
-    .countdown-card {
-        min-width: 110px;
-        padding: 15px;
-    }
-}
-
 /* БЛОК С МЕСТОМ ПРОВЕДЕНИЯ И КАРТОЙ */
 .location-section {
     margin-top: 40px;
@@ -288,15 +271,7 @@ button:hover {
     color: white;
 }
 
-/* Адаптация заголовка и высоты карты для телефонов */
-@media (max-width: 600px) {
-    .location-section h2 {
-        font-size: 28px;
-    }
-    .map-wrapper img {
-        height: 220px;
-    }
-}
+
 
 /* БЛОК С ТАЙМИНГОМ МЕРОПРИЯТИЯ */
 .timeline-section {
@@ -406,32 +381,6 @@ button:hover {
     font-size: 0.95rem;
     color: #7b5c3a;
     line-height: 1.4;
-}
-
-/* Адаптация для мобильных телефонов */
-@media (max-width: 600px) {
-    .timeline-section h2 {
-        font-size: 28px;
-    }
-    .timeline-container {
-        height: 680px;
-    }
-    .timeline-svg {
-        width: 110px; /* На узких экранах делаем волну чуть компактнее */
-    }
-    .timeline-item {
-        width: 43%;
-    }
-    .timeline-item .time {
-        font-size: 1.1rem;
-        padding: 3px 10px;
-    }
-    .timeline-item h3 {
-        font-size: 1.05rem;
-    }
-    .timeline-item p {
-        font-size: 0.85rem;
-    }
 }
 
 /* БЛОК ФОРМЫ ПОДТВЕРЖДЕНИЯ (RSVP) */
@@ -563,14 +512,7 @@ button:hover {
     display: none !important;
 }
 
-@media (max-width: 600px) {
-    .rsvp-section h2 {
-        font-size: 28px;
-    }
-    .radio-card {
-        min-width: 100%;
-    }
-}
+
 
 .audio-widget {
     position: fixed;
@@ -780,4 +722,55 @@ button:hover {
     background-color: #f4ece3;
     color: #8c6d53;
     font-weight: 600;
+}
+
+/* Адаптация под мобильные экраны */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .invitation-content {
+        padding: 30px 20px;
+    }
+    .wedding-date-section h2 {
+        font-size: 28px;
+    }
+    .countdown-card {
+        min-width: 110px;
+        padding: 15px;
+    }
+    .location-section h2 {
+        font-size: 28px;
+    }
+    .map-wrapper img {
+        height: 220px;
+    }
+    .timeline-section h2 {
+        font-size: 28px;
+    }
+    .timeline-container {
+        height: 680px;
+    }
+    .timeline-svg {
+        width: 110px; /* На узких экранах делаем волну чуть компактнее */
+    }
+    .timeline-item {
+        width: 43%;
+    }
+    .timeline-item .time {
+        font-size: 1.1rem;
+        padding: 3px 10px;
+    }
+    .timeline-item h3 {
+        font-size: 1.05rem;
+    }
+    .timeline-item p {
+        font-size: 0.85rem;
+    }
+    .rsvp-section h2 {
+        font-size: 28px;
+    }
+    .radio-card {
+        min-width: 100%;
+    }
 }

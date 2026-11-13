@@ -161,10 +161,6 @@ const rsvpGuestInput = document.getElementById("rsvpGuest");
 const rsvpSuccess = document.getElementById("rsvpSuccess");
 const submitRsvpBtn = document.getElementById("submitRsvpBtn");
 
-// Автозаполнение имени гостя из ссылки ?quest=...
-if (id && quest[id] && rsvpGuestInput) {
-    rsvpGuestInput.value = quest[id];
-}
 
 // НАСТРОЙКИ TELEGRAM БОТА (вставьте свои данные)
 const TELEGRAM_BOT_TOKEN = "9128114649:AAFw5YeoH8nvAeXOgUbudIvjyQbU9oVkSrY";
@@ -219,13 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeSlider = document.getElementById('volume-slider');
     const iconOn = document.getElementById('icon-sound-on');
     const iconOff = document.getElementById('icon-sound-off');
+    const openInvitationBtn = document.getElementById('openInvitation');
 
-    let lastVolume = 0.5; // Запоминаем громкость до выключения
+    let lastVolume = 0.5;
     audio.volume = lastVolume;
 
-    // Функция обновления иконки
-    function updateIcon(volume) {
-        if (volume === 0 || audio.paused) {
+    function updateIcon() {
+        if (audio.volume === 0 || audio.paused) {
             iconOn.style.display = 'none';
             iconOff.style.display = 'block';
         } else {
@@ -234,42 +230,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Изначально ставим иконку "выключено", пока музыка не запущена
-    updateIcon(0);
+    // Автоматически меняем иконку при реальном запуске, паузе или смене громкости
+    audio.addEventListener('play', updateIcon);
+    audio.addEventListener('pause', updateIcon);
+    audio.addEventListener('volumechange', updateIcon);
+
+    updateIcon();
+
+    // Запуск музыки по клику на кнопку «Открыть приглашение»
+    if (openInvitationBtn) {
+        openInvitationBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.volume = lastVolume > 0 ? lastVolume : 0.5;
+                volumeSlider.value = audio.volume;
+                audio.play().catch(err => console.error('Не удалось запустить аудио:', err));
+            }
+        });
+    }
 
     // Клик по кнопке звука (вкл/выкл)
     muteBtn.addEventListener('click', () => {
         if (audio.paused) {
-            // Если музыка еще не играла — запускаем
-            audio.play().catch(e => console.log("Нужно взаимодействие пользователя:", e));
             audio.volume = lastVolume > 0 ? lastVolume : 0.5;
             volumeSlider.value = audio.volume;
+            audio.play().catch(err => console.error('Ошибка воспроизведения:', err));
         } else if (audio.volume > 0) {
-            // Если звук есть — выключаем (mute)
             lastVolume = audio.volume;
             audio.volume = 0;
             volumeSlider.value = 0;
         } else {
-            // Если звук был на 0 — возвращаем прошлую громкость
             audio.volume = lastVolume > 0 ? lastVolume : 0.5;
             volumeSlider.value = audio.volume;
         }
-        updateIcon(audio.volume);
     });
 
-    // Перетаскивание ползунка
+    // Перетаскивание ползунка громкости
     volumeSlider.addEventListener('input', (e) => {
         const newVolume = parseFloat(e.target.value);
-        
-        // Если пользователь начал двигать ползунок, а музыка еще на паузе — запускаем её
         if (audio.paused && newVolume > 0) {
-            audio.play().catch(e => console.log("Ошибка запуска:", e));
+            audio.play().catch(err => console.error('Ошибка запуска:', err));
         }
-
         audio.volume = newVolume;
         if (newVolume > 0) {
             lastVolume = newVolume;
         }
-        updateIcon(newVolume);
     });
 });
