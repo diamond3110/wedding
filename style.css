@@ -6,14 +6,42 @@
 
 body {
     font-family: Georgia, serif;
-    background: #f5f0eb;
+    background: #2b2522; /* Темный фон, на котором красиво смотрится поворот */
     color: #333;
+    overflow: hidden;
 }
 
-.hero {
-    position: relative;
+/* 3D-сцена и вращающаяся карточка */
+.scene {
+    width: 100vw;
     height: 100vh;
+    perspective: 1800px;
+}
 
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Для корректной работы на iPhone/Safari */
+}
+
+/* ЛИЦЕВАЯ СТОРОНА */
+.hero {
     background-image:
         linear-gradient(
             rgba(0, 0, 0, 0.35),
@@ -31,9 +59,11 @@ body {
 
 .overlay {
     text-align: center;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 40px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(6px);
+    padding: 40px 50px;
     border-radius: 20px;
+    max-width: 90%;
 }
 
 h1 {
@@ -48,60 +78,58 @@ p {
 button {
     margin-top: 30px;
     padding: 15px 30px;
-
     border: none;
     border-radius: 50px;
-
     font-size: 1rem;
     cursor: pointer;
-
     background: #d4a373;
     color: white;
+    transition: background 0.3s ease;
 }
 
 button:hover {
     background: #bc8a5f;
 }
 
-.hidden {
-    display: none;
+/* ОБРАТНАЯ СТОРОНА */
+.invitation {
+    background: #f5f0eb;
+    transform: rotateY(180deg);
+    overflow-y: auto; /* Позволяет скроллить страницу вниз, если текста станет больше */
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.invitation {
+.invitation-content {
+    width: 100%;
     max-width: 800px;
-    margin: 50px auto;
-
+    margin: auto;
     background: white;
     border-radius: 20px;
-
     padding: 50px;
     text-align: center;
-
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .guest-name {
-    margin-top: 20px;
-
-    font-size: 30px;
+    font-size: 32px;
     font-style: italic;
-
     color: #7b5c3a;
+    margin-bottom: 15px;
 }
 
 .wedding-date-section {
     margin-top: 40px;
     padding-top: 40px;
-
     text-align: center;
-
     border-top: 1px solid #ccbba7;
 }
 
 .wedding-date-section h2 {
-    font-size: 48px;
-    margin-bottom: 50px;
-
+    font-size: 40px;
+    margin-bottom: 40px;
     color: #50443d;
 }
 
@@ -109,40 +137,437 @@ button:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
     gap: 20px;
 }
 
 .countdown-card {
-    min-width: 140px;
-
-    padding: 30px;
-
+    min-width: 130px;
+    padding: 25px;
     background: #f5f0eb;
     border-radius: 20px;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
 .countdown-card span {
     display: block;
-
-    font-size: 52px;
+    font-size: 48px;
     font-weight: bold;
-
     color: #d4a373;
-
-    transition: 0.3s ease;
 }
 
 .countdown-card p {
     margin-top: 10px;
-
-    font-size: 20px;
+    font-size: 18px;
     color: #555;
 }
 
 .wedding-info {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
+.wedding-info h3 {
+    font-size: 28px;
+    color: #50443d;
+    margin-bottom: 10px;
+}
+
+.location {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: #7b5c3a;
+}
+
+.btn-back {
+    background: transparent;
+    border: 2px solid #d4a373;
+    color: #7b5c3a;
+}
+
+.btn-back:hover {
+    background: #d4a373;
+    color: white;
+}
+
+/* Адаптация под мобильные экраны */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .invitation-content {
+        padding: 30px 20px;
+    }
+    .wedding-date-section h2 {
+        font-size: 28px;
+    }
+    .countdown-card {
+        min-width: 110px;
+        padding: 15px;
+    }
+}
+
+/* БЛОК С МЕСТОМ ПРОВЕДЕНИЯ И КАРТОЙ */
+.location-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #ccbba7; /* Точно такая же разделительная полоса */
+    text-align: center;
+}
+
+.location-section h2 {
+    font-size: 36px;
+    color: #50443d;
+    margin-bottom: 15px;
+}
+
+.location-address {
+    font-size: 1.25rem;
+    color: #7b5c3a;
+    margin-bottom: 25px;
+}
+
+.map-link {
+    display: block;
+    text-decoration: none;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+}
+
+.map-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f5f0eb;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-wrapper img {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover; /* Картинка аккуратно заполнит блок без искажений */
+    transition: transform 0.4s ease;
+}
+
+/* Плашка поверх карты с подсказкой для гостя */
+.map-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 10px 22px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.map-badge span {
+    font-size: 0.95rem;
+    color: #50443d;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Плавная анимация при наведении курсора */
+.map-link:hover .map-wrapper {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.map-link:hover .map-wrapper img {
+    transform: scale(1.03);
+}
+
+.map-link:hover .map-badge {
+    background: #d4a373;
+}
+
+.map-link:hover .map-badge span {
+    color: white;
+}
+
+/* Адаптация заголовка и высоты карты для телефонов */
+@media (max-width: 600px) {
+    .location-section h2 {
+        font-size: 28px;
+    }
+    .map-wrapper img {
+        height: 220px;
+    }
+}
+
+/* БЛОК С ТАЙМИНГОМ МЕРОПРИЯТИЯ */
+.timeline-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #ccbba7;
+    text-align: center;
+}
+
+.timeline-section h2 {
+    font-size: 36px;
+    color: #50443d;
+    margin-bottom: 40px;
+}
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 620px; /* Высота всего блока тайминга */
+    margin: 0 auto;
+}
+
+/* Волнистая линия по центру */
+.timeline-svg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.wave-bg {
+    fill: none;
+    stroke: #e6dcd2;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 6 6; /* Пунктир для непройденного пути */
+}
+
+.wave-progress {
+    fill: none;
+    stroke: #d4a373;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+}
+
+/* Сердечко на линии */
+.timeline-heart {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(212, 163, 115, 0.4);
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Элементы расписания */
+.timeline-item {
+    position: absolute;
+    width: 42%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.item-right {
+    right: 0;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.item-left {
+    left: 0;
+    text-align: right;
+    padding-right: 15px;
+}
+
+.timeline-item .time {
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #d4a373;
+    background: #f5f0eb;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+}
+
+.timeline-item h3 {
+    font-size: 1.25rem;
+    color: #50443d;
+    margin-bottom: 4px;
+}
+
+.timeline-item p {
+    font-size: 0.95rem;
+    color: #7b5c3a;
+    line-height: 1.4;
+}
+
+/* Адаптация для мобильных телефонов */
+@media (max-width: 600px) {
+    .timeline-section h2 {
+        font-size: 28px;
+    }
+    .timeline-container {
+        height: 680px;
+    }
+    .timeline-svg {
+        width: 110px; /* На узких экранах делаем волну чуть компактнее */
+    }
+    .timeline-item {
+        width: 43%;
+    }
+    .timeline-item .time {
+        font-size: 1.1rem;
+        padding: 3px 10px;
+    }
+    .timeline-item h3 {
+        font-size: 1.05rem;
+    }
+    .timeline-item p {
+        font-size: 0.85rem;
+    }
+}
+
+/* БЛОК ФОРМЫ ПОДТВЕРЖДЕНИЯ (RSVP) */
+.rsvp-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #ccbba7;
+    text-align: center;
+}
+
+.rsvp-section h2 {
+    font-size: 36px;
+    color: #50443d;
+    margin-bottom: 12px;
+}
+
+.rsvp-subtitle {
+    font-size: 1.1rem;
+    color: #7b5c3a;
+    margin-bottom: 30px;
+}
+
+.rsvp-form {
+    max-width: 520px;
+    margin: 0 auto 20px auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.05rem;
+    color: #50443d;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid #e0d4c8;
+    border-radius: 14px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    background: #faf7f4;
+    color: #333;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #d4a373;
+    background: #ffffff;
+}
+
+/* Красивые кнопки выбора статуса */
+.radio-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.radio-card {
+    flex: 1;
+    min-width: 200px;
+    cursor: pointer;
+    margin-bottom: 0 !important;
+}
+
+.radio-card input[type="radio"] {
+    display: none;
+}
+
+.radio-card span {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    border: 1.5px solid #e0d4c8;
+    border-radius: 14px;
+    background: #faf7f4;
+    color: #50443d;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.radio-card input[type="radio"]:checked + span {
+    background: #d4a373;
+    border-color: #d4a373;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(212, 163, 115, 0.35);
+}
+
+.btn-submit {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Блок благодарности после отправки */
+.rsvp-success {
+    max-width: 520px;
+    margin: 0 auto 20px auto;
+    padding: 30px;
+    background: #f5f0eb;
+    border-radius: 20px;
+    border: 1px solid #d4a373;
+}
+
+.rsvp-success h3 {
+    font-size: 24px;
+    color: #7b5c3a;
+    margin-bottom: 10px;
+}
+
+.rsvp-success p {
+    font-size: 1.1rem;
+    color: #50443d;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    .rsvp-section h2 {
+        font-size: 28px;
+    }
+    .radio-card {
+        min-width: 100%;
+    }
+}

@@ -4,68 +4,182 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Наша свадьба</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <section class="hero">
-        <div class="overlay">
-            <h1>Дмитрий & Марина</h1>
-            <p>Мы рады пригласить вас на нашу свадьбу</p>
+    <div class="scene">
+        <div class="card" id="invitationCard">
 
-            <button id="openInvitation">
-                Открыть приглашение
-            </button>
+            <!-- ЛИЦЕВАЯ СТОРОНА (Ваш блок .hero) -->
+            <section class="hero card-face">
+                <div class="overlay">
+                    <h1>Дмитрий & Марина</h1>
+                    <p>Мы рады пригласить вас на нашу свадьбу</p>
+
+                    <button id="openInvitation">
+                        Открыть приглашение
+                    </button>
+                </div>
+            </section>
+
+            <!-- ОБРАТНАЯ СТОРОНА (Ваш блок .invitation) -->
+            <section class="invitation card-face" id="invitation">
+                <div class="invitation-content">
+                    <h2 id="guestName" class="guest-name">Дорогие гости</h2>
+                    <p>
+                        С огромной радостью приглашаем вас
+                        разделить с нами самый важный день
+                        нашей жизни!
+                    </p>
+
+                    <div class="wedding-date-section">
+                        <h2>До нашей свадьбы осталось</h2>
+
+                        <div class="countdown">
+                            <div class="countdown-card">
+                                <span id="days">0</span>
+                                <p>дней</p>
+                            </div>
+
+                            <div class="countdown-card">
+                                <span id="hours">0</span>
+                                <p>часов</p>
+                            </div>
+
+                            <div class="countdown-card">
+                                <span id="minutes">0</span>
+                                <p>минут</p>
+                            </div>
+
+                            <div class="countdown-card">
+                                <span id="seconds">0</span>
+                                <p>секунд</p>
+                            </div>
+                        </div>
+
+                        <div class="wedding-info">
+                            <h3>18 июля 2027</h3>
+                            <p>Сбор гостей в 16:00</p>
+                        </div>
+                    </div>
+
+                    <!-- НОВЫЙ БЛОК С РАЗДЕЛИТЕЛЕМ И КАРТОЙ -->
+                    <div class="location-section">
+                        <h2>Место проведения</h2>
+                        <p class="location-address">Банкетный зал «Рио», ул. Дзержинского, 36</p>
+
+                        <!-- Вставьте сюда вашу ссылку из кнопки «Поделиться» в Google Картах -->
+                        <a href="https://maps.app.goo.gl/2YcowFZMbq9xr6xf8" target="_blank" rel="noopener noreferrer" class="map-link">
+                            <div class="map-wrapper">
+                                <!-- Сюда подставьте ваш скриншот карты -->
+                                <img src="images/map.jpg" alt="Карта проезда к месту проведения свадьбы">
+                                <div class="map-badge">
+                                    <span>📍 Открыть в Google Картах</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                                        <!-- БЛОК С ТАЙМИНГОМ МЕРОПРИЯТИЯ -->
+                    <div class="timeline-section">
+                        <h2>Тайминг дня</h2>
+
+                        <div class="timeline-container" id="timelineContainer">
+                            <!-- Вертикальная волнистая линия (SVG) -->
+                            <svg class="timeline-svg" viewBox="0 0 200 600" preserveAspectRatio="none">
+                                <!-- Фоновая бледная линия -->
+                                <path class="wave-bg" d="M 100,0 C 180,75 180,75 100,150 C 20,225 20,225 100,300 C 180,375 180,375 100,450 C 20,525 20,525 100,600" />
+                                <!-- Линия, которая закрашивается по мере скролла -->
+                                <path class="wave-progress" id="wavePath" d="M 100,0 C 180,75 180,75 100,150 C 20,225 20,225 100,300 C 180,375 180,375 100,450 C 20,525 20,525 100,600" />
+                            </svg>
+
+                            <!-- Движущееся сердечко -->
+                            <div class="timeline-heart" id="timelineHeart">
+                                <svg viewBox="0 0 24 24" width="26" height="26">
+                                    <path fill="#d4a373" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+
+                            <!-- События на волнах (чередуются справа и слева) -->
+                            <div class="timeline-item item-right" style="top: 12.5%;">
+                                <span class="time">16:00</span>
+                                <h3>Сбор гостей</h3>
+                                <p>Приветственный фуршет и легкая музыка</p>
+                            </div>
+
+                            <div class="timeline-item item-left" style="top: 37.5%;">
+                                <span class="time">16:30</span>
+                                <h3>Церемония</h3>
+                                <p>Самый трогательный момент нашего дня</p>
+                            </div>
+
+                            <div class="timeline-item item-right" style="top: 62.5%;">
+                                <span class="time">17:30</span>
+                                <h3>Начало банкета</h3>
+                                <p>Праздничный ужин, тосты и танцы</p>
+                            </div>
+
+                            <div class="timeline-item item-left" style="top: 87.5%;">
+                                <span class="time">22:00</span>
+                                <h3>Свадебный торт</h3>
+                                <p>Сладкий финал и бенгальские огни</p>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- БЛОК ПОДТВЕРЖДЕНИЯ ПРИСУТСТВИЯ (RSVP) -->
+                    <div class="rsvp-section">
+                        <h2>Подтверждение присутствия</h2>
+                        <p class="rsvp-subtitle">Пожалуйста, подтвердите ваше присутствие до 1 июля 2027 года</p>
+
+                        <form id="rsvpForm" class="rsvp-form">
+                            <div class="form-group">
+                                <label for="rsvpGuest">Ваше имя и фамилия</label>
+                                <input type="text" id="rsvpGuest" name="guest" placeholder="Введите ваши имена" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Сможете ли вы прийти?</label>
+                                <div class="radio-group">
+                                    <label class="radio-card">
+                                        <input type="radio" name="attendance" value="С радостью придем!" checked>
+                                        <span>С радостью придем!</span>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="attendance" value="К сожалению, не сможем">
+                                        <span>К сожалению, не сможем</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rsvpComment">Комментарий (аллергии, дети, пожелания)</label>
+                                <textarea id="rsvpComment" name="comment" rows="3" placeholder="Если у вас есть особенности питания или вы будете с детьми, напишите об этом здесь..."></textarea>
+                            </div>
+
+                            <button type="submit" id="submitRsvpBtn" class="btn-submit">
+                                Отправить ответ
+                            </button>
+                        </form>
+
+                        <!-- Сообщение после успешной отправки -->
+                        <div id="rsvpSuccess" class="rsvp-success hidden">
+                            <h3>Спасибо за ваш ответ!</h3>
+                            <p>Мы получили ваше сообщение и очень ждем встречи.</p>
+                        </div>
+                    </div>
+
+
+                    <button id="closeInvitation" class="btn-back">
+                        Вернуться к фото
+                    </button>
+                </div>
+            </section>
+
         </div>
-    </section>
-
-    <section class="invitation hidden" id="invitation">
-        <h2 id="guestName" class="guest-name">Дорогие гости</h2>
-        <p> С огромной радостью приглашаем вас
-            разделить с нами самый важный день
-            нашей жизни!
-        </p>
-
-        <div class="wedding-date-section">
-
-            <h2>До нашей свадьбы осталось</h2>
-
-            <div class="countdown">
-
-                <div class="countdown-card">
-                    <span id="days">0</span>
-                    <p>дней</p>
-                </div>
-
-                <div class="countdown-card">
-                    <span id="hours">0</span>
-                    <p>часов</p>
-                </div>
-
-                <div class="countdown-card">
-                    <span id="minutes">0</span>
-                    <p>минут</p>
-                </div>
-
-                <div class="countdown-card">
-                    <span id="seconds">0</span>
-                    <p>секунд</p>
-                </div>
-
-            </div>
-
-            <div class="wedding-info">
-                <h3>18 июля 2027</h3>
-                <p>16:00</p>
-            </div>
-
-        </div>
-    </section>
-
-    
+    </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
