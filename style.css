@@ -847,6 +847,25 @@ button:hover {
     transform: translate(2px, -2px);
 }
 
+.calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  color: #6b7056;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(107, 112, 86, 0.4);
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.calendar-btn:hover {
+  opacity: 0.75;
+}
+
+
 /* Адаптация под мобильные экраны */
 @media (max-width: 600px) {
     h1 {
