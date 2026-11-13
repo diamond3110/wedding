@@ -155,59 +155,79 @@ if (wavePath && timelineContainer && timelineHeart) {
     updateHeartOnScroll();
 }
 
-// ЛОГИКА ФОРМЫ ПОДТВЕРЖДЕНИЯ (RSVP) С ОТПРАВКОЙ В TELEGRAM
+// НАСТРОЙКИ TELEGRAM БОТА
+
 const rsvpForm = document.getElementById("rsvpForm");
-const rsvpGuestInput = document.getElementById("rsvpGuest");
-const rsvpSuccess = document.getElementById("rsvpSuccess");
+const rsvpGuestInput = document.getElementById("guest-name-input");
 const submitRsvpBtn = document.getElementById("submitRsvpBtn");
+const rsvpSuccess = document.getElementById("rsvpSuccess");
 
-
-// НАСТРОЙКИ TELEGRAM БОТА (вставьте свои данные)
-const TELEGRAM_BOT_TOKEN = "9128114649:AAFw5YeoH8nvAeXOgUbudIvjyQbU9oVkSrY";
-const TELEGRAM_CHAT_ID = "1103193768";
+// Функция для безопасной очистки текста от спецсимволов HTML
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
 
 if (rsvpForm) {
     rsvpForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const guest = rsvpGuestInput.value.trim();
-        const attendance = rsvpForm.querySelector('input[name="attendance"]:checked').value;
-        const comment = document.getElementById("rsvpComment").value.trim() || "Без комментариев";
+        const selectedAttendance = rsvpForm.querySelector('input[name="attendance"]:checked');
+        const commentRaw = document.getElementById("rsvpComment").value.trim();
+
+        // Проверяем, выбрал ли гость имя и ответ
+        if (!guest) {
+            alert("Пожалуйста, выберите или введите ваше имя.");
+            return;
+        }
+        if (!selectedAttendance) {
+            alert("Пожалуйста, выберите, сможете ли вы присутствовать.");
+            return;
+        }
+
+        const attendance = selectedAttendance.value;
+        const comment = commentRaw ? escapeHTML(commentRaw) : "Без комментариев";
 
         // Формируем красивое сообщение для Telegram
-        const message = 
+        const message =
             `💍 <b>Новый ответ на приглашение!</b>\n\n` +
-            `👤 <b>Гости:</b> ${guest}\n` +
-            `✅ <b>Статус:</b> ${attendance}\n` +
+            `👤 <b>Гости:</b> ${escapeHTML(guest)}\n` +
+            `✅ <b>Статус:</b> ${escapeHTML(attendance)}\n` +
             `💬 <b>Комментарий:</b> ${comment}`;
 
         submitRsvpBtn.disabled = true;
         submitRsvpBtn.textContent = "Отправка...";
 
-                try {
-            const response = await fetch(`https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        try {
+            const response = await fetch(`https://api.telegram.org/bot9128114649:AAFw5YeoH8nvAeXOgUbudIvjyQbU9oVkSrY/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
+                    chat_id: 1103193768,
                     text: message,
                     parse_mode: "HTML"
                 })
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (response.ok && result.ok) {
                 rsvpForm.classList.add("hidden");
                 rsvpSuccess.classList.remove("hidden");
             } else {
-                throw new Error("Ошибка Telegram API");
+                throw new Error(result.description || "Ошибка Telegram API");
             }
         } catch (error) {
-            alert("Не удалось отправить ответ. Проверьте интернет или напишите нам лично." + error.message);
+            alert("Не удалось отправить ответ: " + error.message);
             submitRsvpBtn.disabled = false;
             submitRsvpBtn.textContent = "Отправить ответ";
         }
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('bg-music');
