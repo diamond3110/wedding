@@ -72,6 +72,8 @@ openButton.addEventListener("click", () => {
 
 closeButton.addEventListener("click", () => {
     card.classList.remove("is-flipped");
+    const audio = document.getElementById('bg-music');
+    audio.pause();
     // Возвращаем скролл обратной стороны наверх после завершения анимации
     setTimeout(() => {
         invitationSide.scrollTop = 0;
