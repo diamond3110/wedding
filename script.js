@@ -3,6 +3,28 @@ const openButton = document.getElementById("openInvitation");
 const closeButton = document.getElementById("closeInvitation");
 const invitationSide = document.getElementById("invitation");
 
+document.getElementById('open-btn').addEventListener('click', function () {
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('env-letter');
+    const overlay = document.getElementById('envelope-overlay');
+
+    // Шаг 1: Открываем клапан и выдвигаем письмо
+    envelope.classList.add('open');
+
+    // Шаг 2: Через 1.3 сек плавно приближаем письмо на весь экран (GPU scale)
+    setTimeout(() => {
+      letter.classList.add('zoom-in');
+    }, 1300);
+
+    // Шаг 3: В пике приближения растворяем шторку, открывая настоящий сайт
+    setTimeout(() => {
+      letter.classList.add('fade-out');
+      overlay.classList.add('hidden');
+    }, 2400);
+});
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Ваш список гостей (сортируется автоматически)
     const guestsList = [
