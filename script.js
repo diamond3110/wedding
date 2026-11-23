@@ -8,22 +8,33 @@ video.playbackRate = 0.5;
 
 document.getElementById('open-btn').addEventListener('click', function () {
     const envelope = document.getElementById('envelope');
-    const letter = document.getElementById('env-letter');
     const overlay = document.getElementById('envelope-overlay');
 
-    // Шаг 1: Открываем клапан и выдвигаем письмо
     envelope.classList.add('open');
 
-    // Шаг 2: Через 1.3 сек плавно приближаем письмо на весь экран (GPU scale)
+    // После того как письмо полностью вышло
     setTimeout(() => {
-      letter.classList.add('zoom-in');
-    }, 1300);
 
-    // Шаг 3: В пике приближения растворяем шторку, открывая настоящий сайт
+        // Очень плавный переход
+        overlay.style.transition = `
+            opacity 2.4s cubic-bezier(.22,.61,.36,1),
+            filter 2.4s cubic-bezier(.22,.61,.36,1)
+        `;
+
+        // Эффект "бумага становится прозрачной"
+        overlay.style.filter = `
+            blur(6px)
+            brightness(1.25)
+            contrast(0.9)
+        `;
+
+        overlay.style.opacity = '0';
+
+    }, 1800);
+
     setTimeout(() => {
-      letter.classList.add('fade-out');
-      overlay.classList.add('hidden');
-    }, 2400);
+        overlay.classList.add('hidden');
+    }, 4300);
 });
 
 
