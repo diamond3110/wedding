@@ -74,7 +74,8 @@ body {
 /* Контейнер конверта */
 .envelope-wrapper {
   position: relative;
-  width: min(560px, 92vw);
+  width: clamp(280px, 80vw, 560px);
+  aspect-ratio: 1.6 / 1;
   height: min(370px, 62vw);
   border-radius: 8px;
   transition: transform 0.6s ease;
@@ -1205,6 +1206,32 @@ button:hover {
 @media (max-width: 600px) {
     h1 {
         font-size: 2.5rem;
+    }
+    .envelope-stage {
+        padding: 20px;
+    }
+
+    .env-hint {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .wax-seal {
+        width: 70px;
+        height: 70px;
+    }
+
+    .wax-inner span {
+        font-size: 18px;
+    }
+
+    .letter-names {
+        font-size: 24px;
+    }
+
+    .letter-subtitle {
+        font-size: 14px;
+        padding: 0 10px;
     }
     .invitation-content {
         padding: 30px 20px;
