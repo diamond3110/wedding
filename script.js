@@ -3,6 +3,9 @@ const openButton = document.getElementById("openInvitation");
 const closeButton = document.getElementById("closeInvitation");
 const invitationSide = document.getElementById("invitation");
 
+const video = document.querySelector('.bg-video');
+video.playbackRate = 0.5;
+
 document.getElementById('open-btn').addEventListener('click', function () {
     const envelope = document.getElementById('envelope');
     const letter = document.getElementById('env-letter');

@@ -23,8 +23,26 @@ body {
     overflow: hidden;
 }
 
+.bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px) grayscale(100%);
+    transform: scale(1.15);
+}
+
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    z-index: 1;
+}
+
 /* Экран поверх сайта */
 #envelope-overlay {
+  overflow: hidden;
   position: fixed;
   inset: 0;
   background: rgba(244, 241, 234, 0.94);
@@ -49,6 +67,8 @@ body {
   align-items: center;
   gap: 32px;
   perspective: 1400px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Контейнер конверта */
@@ -58,6 +78,16 @@ body {
   height: min(370px, 62vw);
   border-radius: 8px;
   transition: transform 0.6s ease;
+  box-shadow:
+        0 20px 50px rgba(0,0,0,.35),
+        0 2px 8px rgba(0,0,0,.2);
+  background:
+        linear-gradient(
+            135deg,
+            #a8a58c 0%,
+            #98967c 50%,
+            #88856f 100%
+       );
 }
 
 .envelope-wrapper:hover {
